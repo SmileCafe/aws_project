@@ -7,5 +7,13 @@ resource "local_file" "foo" {
   # ${path.module} : string interpolation Grammar
   # path of directory for the file, main.tf
   filename = "${path.module}/foo.txt"
-  content  = "Hello world!"
+  content  = data.local_file.bar.content
+}
+
+data "local_file" "bar" {
+  filename = "${path.module}/bar.txt"
+}
+
+output "file_bar" {
+  value = data.local_file.bar
 }
